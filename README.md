@@ -9,3 +9,13 @@ As a local organizer, it would be wonderful to be more tied in to the direction 
 
 The More You Know ¸.·´¯`★
 
+
+--------------------
+  
+Please file issues for what you'd love to see from Knode! Contributing documentation and roadmap coming SOON.
+
+
+
+License
+-------
+MIT 
