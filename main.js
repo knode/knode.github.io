@@ -2,36 +2,44 @@ var fs = require('fs');
 var handlebars = require('handlebars');
 var _ = require('underscore');
 
-var speakers = [
+var cities = [
     {
-        name: "Justin Abrahms"
-        , location: "Portland, OR"
-        , twitter: "@justinabrahms"
-        , github: "justinabrahms"
-        , preferred_audience_size: "any"
-        , travel_availability: "if comped"
+      city: "Portland, OR",
+      speakers: [
+        {
+            name: "Justin Abrahms"
+            , location: "Portland, OR"
+            , twitter: "@justinabrahms"
+            , github: "justinabrahms"
+            , preferred_audience_size: "any"
+            , travel_availability: "if comped"
+        }
+        , {
+            name: "Christopher Swenson"
+            , location: "Portland, OR"
+            , twitter: "@caswenson"
+            , github: "caswenson"
+            , preferred_audience_size: "large"
+            , travel_availability: "local"
+        }
+      ]
     }
     , {
-        name: "Christopher Swenson"
-        , location: "Portland, OR"
-        , twitter: "@caswenson"
-        , github: "caswenson"
-        , preferred_audience_size: "large"
-        , travel_availability: "local"
-    }
-    , {
+      city: "San Francisco, CA"
+      , speakers: [{
         name: "Jason Denizac"
         , location: "San Fancisco, CA"
         , twitter: "@_jden"
         , github: "jden"
         , preferred_audience_size: "small"
         , travel_availability: "any"
-   }
+      }]
+    }
 ];
 
 function get_speakers() { 
     return {
-        speakers: speakers
+        cities: cities
     };
 };
 
