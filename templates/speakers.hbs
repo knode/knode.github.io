@@ -1,7 +1,72 @@
-{{#cities}}
-  City: {{city}}
+<!DOCTYPE html>
+<html>
 
-  {{#speakers}}
-  Name:{{name}}
-  {{/speakers}}
-{{/cities}}
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Meetups: A place to put info about your local meetup. Anything node-flavored JS welcome!" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" href="http://knode.io/style/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://knode.io/style/assets/css/ostrich-sans/stylesheet.css" />
+    <link rel="stylesheet" href="http://knode.io/style/assets/css/main.css" />
+    <link rel="stylesheet" media="screen" href="stylesheets/site-specific.css">
+
+    <title>Speakers</title>
+  </head>
+
+  <body>
+    <h1>Speakers</h1>
+    <!--<div>MAP PLACEHOLDER</div>--> 
+    <section>
+        <article>
+            <!-- This is where the listings go. They will be sorted in alphabetical order by city.-->
+            {{#cities}}
+                <h3>{{city}}</h3>
+                <!-- within each city directory, list the meetups in alphabetical order by group name-->
+                <ul>
+                {{#speakers}}
+                  <li>
+                    <h5>{{name}}</h5>
+                    <ul>
+                      <li><img src="../images/twitter_icon.png"/> {{twitter}}</li>
+                      <li><img src="../images/github_icon.png"/> {{github}}</li>
+                    </ul>
+                    <p>Preferred audience size: {{preferred_audience_size}}</p>
+                    <p>Travel availability: {{travel_availability}}</p>
+                    <h6>About me:</h6>
+                    <div>{{{about_me}}}</div>
+                  </li>
+                {{/speakers}}
+                </ul>
+            {{/cities}}
+                <!-- within each city directory, list the meetups in alphabetical order by group name-->
+{{!--
+                <ul>
+                    <!--Please map these to the markdown we require for input-->            
+                    <h5><a href="http://pdxnode.org">PDXNode</a></h5>
+                        <a href="https://github.com/PDXNode/pdxnode">Contribute</a>
+                        <li>Organizers: Ben, Tracy, Chris, Wraithan, Mean Dave, Dave, Adam, Nick, Adron, Justin</li>
+                        <li>Bi-monthly presentation and hack nights. We also hold workshops & nodebots events</li>
+                        <li>Talks are submitted via PR and reviewed by organizers. Organizers seek out and encourage talks from community members.</li>
+                        <li>#pdxnode on freenode.irc.net</li>
+                        <li><a href="https://github.com/PDXNode/pdxnode/blob/master/code-of-conduct.md">Code of Conduct</a></li>
+                </ul>
+            <h3>AnotherCity, USA</h3>
+                <!-- within each city directory, list the meetups in alphabetical order by group name-->
+                <ul>
+                    <!--Please map these to the markdown we require for input-->            
+                    <h5><a href="http://google.com">AwesomeGroup</a></h5>
+                        <a href="https://github.com/PDXNode/">Contribute</a>
+                        <li>Organizers: The Carebears</li>
+                        <li>Bi-monthly presentation and hack nights. We also hold workshops & nodebots events</li>
+                        <li>Talks are submitted via PR and reviewed by organizers. Organizers seek out and encourage talks from community members.</li>
+                        <li>#winning on freenode.irc.net</li>
+                        <li><a href="https://github.com/PDXNode/pdxnode/blob/master/code-of-conduct.md">Code of Conduct</a></li>
+                </ul>
+            --}}
+        </article>
+    </section>
+  </body>
+
+</html>        
