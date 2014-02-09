@@ -16,7 +16,7 @@
     "url": "git://github.com/knode/knode.github.io.git"
   },
   "author": "",
-  "license": "BSD-2-Clause",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/knode/knode.github.io/issues"
   },

@@ -38,9 +38,9 @@ function get_speakers() {
     return speaker_profile({cities: cities})
 
     function speaker_profile(city_map) {
-      _.each(city_map.cities, function(city) {
-          _.each(city.speakers, function(speaker) {
-            speaker.about_me = marked(speaker.about_me)
+      city_map.cities.forEach(function(city) {
+          city.speakers.forEach(function(speaker) {
+              speaker.about_me = marked(speaker.about_me)
           })
       })
       return city_map
