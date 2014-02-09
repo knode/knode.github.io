@@ -4,4 +4,5 @@ build:
 	node main.js
 
 install:
+	git submodule update --init
 	npm install .
