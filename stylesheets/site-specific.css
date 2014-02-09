@@ -6,3 +6,9 @@
 #hero {
     background: url('http://knode.io/style/assets/background.svg') white;
 }
+
+#nav {
+    margin-left:auto;
+    margin-bottom:0;    
+}
+    
