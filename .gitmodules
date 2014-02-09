@@ -1,0 +1,3 @@
+[submodule "style"]
+	path = style
+	url = git@github.com:knode/style.git
