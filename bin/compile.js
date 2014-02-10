@@ -105,7 +105,7 @@ function compile(ready) {
         if(err) {
           return ready(err)
         }
-        console.log('TEMPLATE: ', template)
+
         var output = handlebars.compile(txt)(ctx)
 
         fs.writeFile('output/' + outputFile, output, function(err) {
@@ -157,8 +157,6 @@ function wrapperify(name, txt) {
     }
 
     this.content = new handlebars.SafeString(content)
-
-    console.log(name, this.content)
 
     return tpl(this)
   })

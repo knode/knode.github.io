@@ -13,9 +13,7 @@ var meetups = require('knode-meetups')
 var base_dir = path.join(__dirname, '..', 'output')
 
 var targets = {
-    'stylesheets': path.join(__dirname, '..', 'stylesheets')
-  , 'javascripts': path.join(__dirname, '..', 'javascripts')
-  , 'images': path.join(__dirname, '..', 'images')
+    'javascripts': path.join(__dirname, '..', 'javascripts')
   , 'style': path.join(__dirname, '..', 'node_modules', 'knode-style')
 }
 
