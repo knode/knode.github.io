@@ -42,7 +42,7 @@ function main(ready) {
       compile(function() {
         compiling = false
       })
-    })
+    }, 500)
   }
 }
 
