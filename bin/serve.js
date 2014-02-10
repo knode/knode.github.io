@@ -50,11 +50,15 @@ if(require.main === module) {
   main(function(err, server) {
     if(err) {
       console.error(err.stack || err)
+
+      return process.exit(1)
     }
 
     portfinder.getPort(function(err, port) {
       if(err) {
         console.error(err.stack || err)
+
+        return process.exit(1)
       }
 
       server.listen(port)
