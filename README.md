@@ -1,5 +1,4 @@
-knode.github.io
-===============
+# knode.github.io
 
 A resource for all things node.js.
 
@@ -9,15 +8,22 @@ As a local organizer, it would be wonderful to be more tied in to the direction 
 
 The More You Knode ¸.·´¯`★
 
-
 --------------------
   
 Please file issues for what you'd love to see from Knode! Contributing documentation and roadmap coming SOON.
 
+## developing
 
+To develop locally, follow these steps:
 
-License
--------
+```bash
+$ npm install
+$ npm start
+```
+
+This should open a local development server. It will automatically recompile on filesystem changes, so no need
+to restart.
+
+# License
+
 MIT 
-
-<!--random comment to get our handle on irc back OI2080808208-->
