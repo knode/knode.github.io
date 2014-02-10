@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Meetups: A place to put info about your local meetup. Anything node-flavored JS welcome!" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+    <link rel="stylesheet" href="/style/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/style/assets/css/ostrich-sans/stylesheet.css" />
+    <link rel="stylesheet" href="/style/assets/css/main.css" />
+    <link rel="stylesheet" media="screen" href="/stylesheets/site-specific.css" />
+
+    <title>{{#if title}}{{ title }}{{else}}KNODE{{/if}}</title>
+  </head>
+
+  <body id="{{body_id}}" class="{{body_class}}">
+    <div id="hero" style="">
+    {{#if logo}}
+        <svg width="220" height="220" style="margin: 0pt auto; text-align:center;">
+            <defs>
+                <clipPath id="hexagon">
+                    <path d="
+                        M0,64
+                        L0,94
+                        Q0 96,4 98
+                        L60,126
+                        Q64 128,68 126
+                        L124,98
+                        Q128 96,128 94
+                        L128,34
+                        Q128 32,124 30
+                        L68,2
+                        Q64 0,60 2
+                        L4,30
+                        Q0 32,0 34
+                        L0,32
+                        Z
+                    "></path>
+                </clipPath>
+                <clipPath id="pages">
+                    <path d="
+                        M18,40
+                        L18,70
+                        c4 28, 42 2, 46 26
+                        L64,66
+                        c-4 -30, -40 -4, -46 -26
+                    "></path>
+
+                    <path transform="translate(128,0)scale(-1,1)" d="
+                        M18,40
+                        L18,70
+                        c4 28, 42 2, 46 26
+                        L64,66
+                        c-4 -30, -40 -4, -46 -26
+                    "></path>
+                </clipPath>
+            </defs>
+
+            <g transform="translate(14,14)scale(1.5)">
+                <path class="hexagon" fill="none" d="
+                    M0,64
+                    L0,96
+                    L64,128
+                    L124,98
+                    L128,96
+                    L128,32
+                    L64,0
+                    L0,32
+                    Z
+                "></path>
+                <!--
+                <path class="hexagon" fill="none" d="
+                    M0,64
+                    L0,94
+                    Q0 96,4 98
+                    L60,126
+                    Q64 128,68 126
+                    L124,98
+                    Q128 96,128 94
+                    L128,34
+                    Q128 32,124 30
+                    L68,2
+                    Q64 0,60 2
+                    L4,30
+                    Q0 32,0 34
+                    L0,32
+                    Z
+                " />
+                -->
+
+                <path fill="black" fill-opacity="0.333" stroke="none" d="
+                    M0,64
+                    L0,94
+                    Q0 96,4 98
+                    L60,126
+                    Q64 128,68 126
+                    L124,98
+                    Q128 96,128 94
+                    L128,34
+                    Q128 32,124 30
+                    L68,2
+                    Q64 0,60 2
+                    L4,30
+                    Q0 32,0 34
+                    L0,32
+                    Z
+                ">
+                </path>
+
+
+                <path class="book" stroke-width="0" stroke="#f4f4f2" d="
+                    M16,42
+                    L16,84
+                    L64,110
+                    L112,84
+                    L112,42
+                    L64,68
+                "></path>
+
+                <path stroke-width="0" fill="#9e9a9b" d="
+                    M18,66
+                    L18,82
+                    L64,108
+                    L64,66
+                "></path>
+
+                <path transform="translate(128,0)scale(-1,1)" stroke-width="0" fill="#7e7a7b" d="
+                    M18,66
+                    L18,82
+                    L64,108
+                    L64,66
+                "></path>
+
+                <path stroke-width="0" fill="#f4f4f2" d="
+                    M18,40
+                    L18,70
+                    c4 28, 42 2, 46 26
+                    L64,66
+                    c-4 -30, -40 -4, -46 -26
+                "></path>
+
+                <path transform="translate(128,0)scale(-1,1)" stroke-width="0" fill="#bebabb" d="
+                    M18,40
+                    L18,70
+                    c4 28, 42 2, 46 26
+                    L64,66
+                    c-4 -30, -40 -4, -46 -26
+                "></path>
+
+                <path stroke-width="0" fill="#4e4a4b" d="
+                    M 30,86
+                    c38 0, 30 12, 32 18
+                    c0 2, 0 -6, -32 -18
+                "></path>
+
+                <path transform="translate(128,0)scale(-1,1)" stroke-width="0" fill="#4e4a4b" d="
+                    M 30,86
+                    c38 0, 30 12, 32 18
+                    c0 2, 0 -6, -32 -18
+                "></path>
+
+                <rect width="28" height="128" x="72" y="0" clip-path="url(#pages)" fill="#f4f4f2"></rect>
+                <rect width="8" height="128" x="48" y="0" clip-path="url(#pages)" fill="#fff"></rect>
+                <rect width="8" height="128" x="80" y="0" clip-path="url(#pages)" fill="#fff"></rect>
+                <rect width="2" height="128" x="62" y="0" clip-path="url(#pages)" fill="#bebabb"></rect>
+                <rect width="1" height="128" x="64" y="0" clip-path="url(#pages)" fill="#4e4a4b"></rect>
+
+                <text class="title" x="44" y="42" font-size="24" fill="white">KNODE</text>
+                <g>
+                    <path class="book-text" stroke-dasharray="0,12,17,1,6,1,7,1,5,20" d="
+                        M18,40
+                        c4 28, 42 2, 46 26
+                    "></path>
+                    <path class="book-text" stroke-dasharray="0,12,6,1,3,1,4,1,8,1,7,13" d="
+                        M18,43
+                        c4 28, 42 2, 46 26
+                    "></path>
+                    <path class="book-text" stroke-dasharray="0,12,11,1,10,2,12,20" d="
+                        M18,49
+                        c4 28, 42 2, 46 26
+                    "></path>
+                    <path class="book-text" stroke-dasharray="0,12,12,1,4,1,5,1,7,1,3,20" d="
+                        M18,52
+                        c4 28, 42 2, 46 26
+                    "></path>
+                    <path class="book-text" stroke-dasharray="0,12,6,1,3,1,4,1,8,1,7,13" d="
+                        M18,55
+                        c4 28, 42 2, 46 26
+                    "></path>
+
+                    <path class="book-text" stroke-dasharray="0,12,8,20,0,42" d="
+                        M18,58
+                        c4 28, 42 2, 46 26
+                    "></path>
+
+                    <path class="book-text" stroke-dasharray="0,12,24,2,12,20" d="
+                        M18,64
+                        c4 28, 42 2, 46 26
+                    "></path>
+                    <path class="book-text" stroke-dasharray="0,12,8,1,6,1,7,1,6,1,3,20" d="
+                        M18,67
+                        c4 28, 42 2, 46 26
+                    "></path>
+                </g>
+                <g transform="translate(128,0)scale(-1,1)">
+                    <path class="book-text" stroke-dasharray="0,12,17,1,6,1,7,1,5,20" d="
+                        M18,40
+                        c4 28, 42 2, 46 26
+                    "></path>
+                    <path class="book-text" stroke-dasharray="0,18,6,1,3,1,4,1,8,1,7,13" d="
+                        M18,43
+                        c4 28, 42 2, 46 26
+                    "></path>
+                    <path class="book-text" stroke-dasharray="0,14,11,1,10,2,12,20" d="
+                        M18,49
+                        c4 28, 42 2, 46 26
+                    "></path>
+                    <path class="book-text" stroke-dasharray="0,15,12,1,4,1,5,1,7,1,3,20" d="
+                        M18,52
+                        c4 28, 42 2, 46 26
+                    "></path>
+                    <path class="book-text" stroke-dasharray="0,18,6,1,3,1,4,1,8,1,7,13" d="
+                        M18,55
+                        c4 28, 42 2, 46 26
+                    "></path>
+
+                    <path class="book-text" stroke-dasharray="0,42,8,20" d="
+                        M18,58
+                        c4 28, 42 2, 46 26
+                    "></path>
+
+                    <path class="book-text" stroke-dasharray="0,12,24,2,12,20" d="
+                        M18,64
+                        c4 28, 42 2, 46 26
+                    "></path>
+                    <path class="book-text" stroke-dasharray="0,16,8,1,6,1,7,1,6,1,3,20" d="
+                        M18,67
+                        c4 28, 42 2, 46 26
+                    "></path>
+                </g>
+            </g>
+        </svg>
+        <h2>a resource for all things node</h2>
+    {{/if}}
+          <button type="button" class="btn btn-default navbar-btn"><a href="/speakers">Speakers</a></button>
+          <button type="button" class="btn btn-default navbar-btn"><a href="/meetups">Meetups</a></button>
+          <button type="button" class="btn btn-default navbar-btn"><a href="#">CFP</a></button>
+          <button type="button" class="btn btn-default navbar-btn"><a href="http://nodemeatspace.com/">Node-Meatspace</a></button>
+          <button type="button" class="btn btn-default navbar-btn"><a href="#">Q &amp; A</a></button>
+    </div>
+
+    {{./content}}
+
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+  </body>
+</html>        
