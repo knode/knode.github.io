@@ -31,13 +31,13 @@ function main(ready) {
   })
 
   function recompile() {
+    if(compiling) {
+      return
+    }
+
     clearTimeout(timeout)
 
     timeout = setTimeout(function iter() {
-      if(compiling) {
-        return timeout = setTimeout(iter, 500)
-      }
-
       compiling = true
       compile(function() {
         compiling = false
