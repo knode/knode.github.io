@@ -1,0 +1,25 @@
+{
+  "name": "knode.github.io",
+  "version": "0.0.0",
+  "description": "Website for knode community portal",
+  "main": "main.js",
+  "dependencies": {
+    "handlebars": "~1.3.0",
+    "underscore": "~1.5.2",
+    "marked": "~0.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/knode/knode.github.io.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/knode/knode.github.io/issues"
+  },
+  "homepage": "https://github.com/knode/knode.github.io"
+}
