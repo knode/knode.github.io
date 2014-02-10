@@ -6,43 +6,55 @@ var portfinder = require('portfinder')
   , open = require('opener')
   , path = require('path')
   , http = require('http')
+  , fs = require('fs')
 
 var compile = require('./compile.js')
+  , install = require('./install.js')
 
 var dir = path.join(__dirname, '..', 'output')
 
 function main(ready) {
-  var server = ecstatic({root: dir})
-    , compiling = false
-    , timeout
-
-  watchr.watch({
-      path: path.join(__dirname, '..')
-    , listener: recompile
-    , ignoreHiddenFiles: true
+  fs.exists(dir, function(exists) {
+    exists ? setup(null) : install(setup)
   })
 
-  compile(function(err) {
+  function setup(err) {
     if(err) {
       return ready(err)
     }
 
-    ready(null, http.createServer(server))
-  })
+    var server = ecstatic({root: dir, defaultExt: true})
+      , compiling = false
+      , timeout
 
-  function recompile() {
-    if(compiling) {
-      return
+    watchr.watch({
+        path: path.join(__dirname, '..')
+      , listener: recompile
+      , ignoreHiddenFiles: true
+    })
+
+    compile(function(err) {
+      if(err) {
+        return ready(err)
+      }
+
+      ready(null, http.createServer(server))
+    })
+
+    function recompile() {
+      if(compiling) {
+        return
+      }
+
+      clearTimeout(timeout)
+
+      timeout = setTimeout(function iter() {
+        compiling = true
+        compile(function() {
+          compiling = false
+        })
+      }, 500)
     }
-
-    clearTimeout(timeout)
-
-    timeout = setTimeout(function iter() {
-      compiling = true
-      compile(function() {
-        compiling = false
-      })
-    }, 500)
   }
 }
 
