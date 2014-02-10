@@ -1,7 +1,8 @@
+module.exports = compile
+
 var fs = require('fs')
   , handlebars = require('handlebars')
-  , _ = require('underscore')
-  , marked = require('marked');
+  , marked = require('marked')
 
 var cities = [
     {
@@ -32,7 +33,7 @@ var cities = [
             , about_me: "I'm a Node engineer for New Relic who has contributed significantly to their\ninstrumentation for Node.js. I've been using Node professionally since 2011,\nco-ran one of the session tracks at NodeConf 2013, and have contributed some\n small pieces to Node core. My most significant public project aside from\n [node-newrelic](https://github.com/newrelic/node-newrelic) is probably\n [continuation-local storage](https://github.com/othiym23/node-continuation-local-storage),\nof which I am the primary maintainer. No server-side JavaScript is too gross\n for me to be interested in.\n \nNode is a great platform but it can be scary to get started with, and it can\ncontinue to be scary to plumb its depths. I'm comfortable with Node's (and\n    JavaScript's) many idiosyncracies and awkward design tradeoffs and really enjoy\nhelping other people get more comfortable as well. Having done all of free-form\ntalks with questions, formal presentations, and hands-on workshops, I enjoy all\nthree, although I do better when there are frequent opportunities for\nquestions.\n "
       }]
     } 
-];
+]
 
 function get_speakers() { 
     return speaker_profile({cities: cities})
@@ -45,36 +46,50 @@ function get_speakers() {
       })
       return city_map
     }
-};
+}
 
 /**
  * A mapping of template name (which lives in the templates/ directory) to
  * functions which return a context the template is rendered with.
  */
 var template_contextfn = {
-  'speakers.hbs': get_speakers,
-  'index.hbs': function () {}
-};
+    'speakers.hbs': get_speakers
+  , 'index.hbs': Function()
+}
 
-function compile () { 
-  _.each(template_contextfn, function (ctxFn, template) {
+function compile(ready) { 
+  var keys = Object.keys(template_contextfn)
+    , pending = keys.length
+
+  keys.forEach(function(template) {
     var outputFile = template.replace('hbs', 'html')
-    , ctx = template_contextfn[template]()
+      , ctxFn = template_contextfn[template] 
+      , ctx = template_contextfn[template]()
 
-    fs.readFile('templates/' + template, 'utf8', function (err, txt) {
-      if (err) {
-        throw err
+    fs.readFile('templates/' + template, 'utf8', function(err, txt) {
+      if(err) {
+        return ready(err)
       }
       var output = handlebars.compile(txt)(ctx)
 
-      fs.writeFile('output/' + outputFile, output, function (err) {
-        if (err) {
-          throw err
+      fs.writeFile('output/' + outputFile, output, function(err) {
+        if(err) {
+          return ready(err)
         }
-        console.log("Wrote", template, 'to', outputFile);
+        console.log('Wrote %s to %s', template, outputFile)
+
+        !--pending && ready(null)
       })
     })
   })
-};
+}
 
-compile();
+if(require.main === module) {
+  compile(function(err) {
+    if(err) {
+      console.error(err.stack || err)
+    }
+
+    process.exit(err ? 1 : 0)
+  })
+}
