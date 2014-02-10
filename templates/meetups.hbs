@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Meetups: A place to put info about your local meetup. Anything node-flavored JS welcome!" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+    <link rel="stylesheet" href="/style/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/style/assets/css/ostrich-sans/stylesheet.css" />
+    <link rel="stylesheet" href="/style/assets/css/main.css" />
+    <link rel="stylesheet" media="screen" href="/stylesheets/site-specific.css" />
+
+    <title>Meetups</title>
+  </head>
+
+  <body>
+    <h1>Meetups</h1>
+    <section>
+        <ul>
+            {{#meetups}}
+                <li>
+                    <h3>{{name}}</h3>
+                    <h4>{{location}}</h4>
+                </li>
+            {{/meetups}}
+        </ul>
+    </section>
+  </body>
+
+</html>        

@@ -1,8 +1,8 @@
 module.exports = compile
 
-var fs = require('fs')
-  , handlebars = require('handlebars')
+var handlebars = require('handlebars')
   , marked = require('marked')
+  , fs = require('fs')
 
 var cities = [
     {
@@ -48,16 +48,36 @@ function get_speakers() {
     }
 }
 
+function get_meetups() {
+  var meetups = require('./meetups.json')
+
+  return {'meetups': meetups}
+}
+
 /**
  * A mapping of template name (which lives in the templates/ directory) to
  * functions which return a context the template is rendered with.
  */
 var template_contextfn = {
     'speakers.hbs': get_speakers
+  , 'meetups.hbs': get_meetups
   , 'index.hbs': Function()
 }
 
-function compile(ready) { 
+function compile(ready) {
+  // fail early if we don't have `meetups.json` available,
+  // but not so early that `bin/install.js` explodes by
+  // requiring this file.
+  try {
+    require('./meetups.json')
+  } catch(err) {
+    return ready(new Error(
+        'Error: could not find meetups.json.\n' +
+        'Please execute \x1b[32m`npm run update`\x1b[0m' +
+        ' and rerun this command.'
+    ))
+  }
+
   var keys = Object.keys(template_contextfn)
     , pending = keys.length
 

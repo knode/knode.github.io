@@ -2,9 +2,13 @@ module.exports = main
 
 var compile = require('./compile.js')
 
-var mkdirp = require('mkdirp')
+var meetups = require('knode-meetups')
+  , JSONStream = require('JSONStream')
+  , concat = require('concat-stream')
+  , mkdirp = require('mkdirp')
   , path = require('path')
   , cpr = require('cpr')
+  , fs = require('fs')
 
 var base_dir = path.join(__dirname, '..', 'output')
 
@@ -37,7 +41,17 @@ function main(ready) {
         return onerror(err)
       }
 
-      !--pending && compile(ready)
+      !--pending && oncopied()
+    }
+
+    function oncopied() {
+      meetups()
+        .pipe(JSONStream.stringify())
+        .pipe(fs.createWriteStream(
+          path.join(__dirname, 'meetups.json'))
+        ).on('finish', function() {
+          compile(ready)
+        })
     }
 
     function onerror(err) {
