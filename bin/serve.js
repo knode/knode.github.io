@@ -23,7 +23,7 @@ function main(ready) {
       return ready(err)
     }
 
-    var server = ecstatic({root: dir, defaultExt: true})
+    var server = ecstatic({root: dir, defaultExt: true, cache: 0})
       , compiling = false
       , timeout
 

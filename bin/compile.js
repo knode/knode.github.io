@@ -2,6 +2,7 @@ module.exports = compile
 
 var handlebars = require('handlebars')
   , marked = require('marked')
+  , path = require('path')
   , fs = require('fs')
 
 var cities = [
@@ -81,26 +82,83 @@ function compile(ready) {
   var keys = Object.keys(template_contextfn)
     , pending = keys.length
 
-  keys.forEach(function(template) {
-    var outputFile = template.replace('hbs', 'html')
-      , ctxFn = template_contextfn[template] 
-      , ctx = template_contextfn[template]()
+  add_helpers(onhelpers)
 
-    fs.readFile('templates/' + template, 'utf8', function(err, txt) {
-      if(err) {
-        return ready(err)
-      }
-      var output = handlebars.compile(txt)(ctx)
+  function onhelpers(err) {
+    if(err) {
+      return ready(err)
+    }
 
-      fs.writeFile('output/' + outputFile, output, function(err) {
+    keys.forEach(function(template) {
+      var outputFile = template.replace('hbs', 'html')
+        , ctxFn = template_contextfn[template] 
+        , ctx = template_contextfn[template]()
+
+      fs.readFile(path.join(
+          __dirname
+        , '..'
+        , 'templates'
+        , template
+      ), 'utf8', onread)
+      
+      function onread(err, txt) {
         if(err) {
           return ready(err)
         }
-        console.log('Wrote %s to %s', template, outputFile)
 
-        !--pending && ready(null)
-      })
+        var output = handlebars.compile(txt)(ctx)
+
+        fs.writeFile('output/' + outputFile, output, function(err) {
+          if(err) {
+            return ready(err)
+          }
+          console.log('Wrote %s to %s', template, outputFile)
+
+          !--pending && ready(null)
+        })
+      }
     })
+  }
+}
+
+function add_helpers(ready) {
+  var helpers = [
+      'base'
+    , 'wrap'
+  ]
+
+  var pending = helpers.length
+
+  helpers.forEach(function(helper) {
+    var dir = path.join(__dirname, '..', 'helpers', helper) + '.hbs'
+
+    fs.readFile(dir, 'utf8', function(err, txt) {
+      if(err) {
+        return ready(err)
+      }
+
+      wrapperify(helper, txt)
+      !--pending && ready(null)
+    })
+  })
+}
+
+function wrapperify(name, txt) {
+  var tpl = handlebars.compile(txt)
+
+  handlebars.registerHelper(name, function(options) {
+    var content = options.fn(this)
+      , ctx = {}
+
+    options.hash = options.hash || {}
+
+    for(var key in options.hash) {
+      this[key] = options.hash[key]
+    }
+
+    this.content = new handlebars.SafeString(content)
+
+    return tpl(this)
   })
 }
 

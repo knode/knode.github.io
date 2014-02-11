@@ -1,48 +1,34 @@
-<!DOCTYPE html>
-<html>
-
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Meetups: A place to put info about your local meetup. Anything node-flavored JS welcome!" />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
-    <link rel="stylesheet" href="/style/assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/style/assets/css/ostrich-sans/stylesheet.css" />
-    <link rel="stylesheet" href="/style/assets/css/main.css" />
-    <link rel="stylesheet" media="screen" href="/stylesheets/site-specific.css" />
-
-    <title>Speakers</title>
-  </head>
-
-  <body>
-    <h1>Speakers</h1>
-    <!--<div>MAP PLACEHOLDER</div>--> 
+{{#base body_id="speaker_page"}}
+  {{#wrap}}
     <section>
         <article>
             <!-- This is where the listings go. They will be sorted in alphabetical order by city.-->
             {{#cities}}
-                <h3>{{city}}</h3>
                 <!-- within each city directory, list the meetups in alphabetical order by group name-->
-                <ul>
-                {{#speakers}}
-                  <li>
-                    <img src="{{image}}"/>
-                    <h5>{{name}}</h5>
-                    <ul>
-                      <li><img src="../images/twitter_icon.png"/> {{twitter}}</li>
-                      <li><img src="../images/github_icon.png"/> {{github}}</li>
-                    </ul>
-                    <p>Preferred audience size: {{preferred_audience_size}}</p>
-                    <p>Travel availability: {{travel_availability}}</p>
-                    <h6>About me:</h6>
-                    <div>{{{about_me}}}</div>
-                  </li>
-                {{/speakers}}
-                </ul>
+                <section class="city">
+                    <h3>{{city}}</h3>
+                    {{#speakers}}
+                      <div class="speaker">
+                        <h4>
+                            {{name}}
+                            <span class="social">
+                                {{#if twitter}}<a class="ion-social-twitter" href="https://twitter.com/{{twitter}}"></a>{{/if}}
+                                {{#if github}}<a class="ion-social-github" href="https://github.com/{{github}}"></a>{{/if}}
+                            </span>
+                            <img class="avatar" src="{{image}}" />
+                        </h4>
+                        <p>Preferred audience size: {{preferred_audience_size}}</p>
+                        <p>Travel availability: {{travel_availability}}</p>
+                        <div class="speaker-about">
+                            <div>{{{about_me}}}</div>
+                        </div>
+                        <a class="call-to-action inverse" href="{{knode-info}}#">more info <span class="ion-arrow-right-c"></span></a>
+                      </div>
+                    {{/speakers}}
+                </section>
             {{/cities}}
         </article>
     </section>
-  </body>
 
-</html>        
+  {{/wrap}}
+{{/base}}
